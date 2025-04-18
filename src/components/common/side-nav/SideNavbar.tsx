@@ -15,21 +15,28 @@ import {
   rem,
   ScrollArea,
   Tooltip,
-  useMantineColorScheme
+  useMantineColorScheme,
+  Box,
+  Collapse,
+  Text,
+  ThemeIcon,
+  UnstyledButton
 } from '@mantine/core';
 import {
   IconLogout,
-  IconMenu2,
   IconMoon,
   IconSearch,
   IconSun,
   IconUser,
-  IconX
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconChevronRight,
+  IconHttpConnect
 } from '@tabler/icons-react';
 
 import { NavBarLinksGroup } from '../nav-links-group/NavLinksGroup';
 import { NavBarLinksGroupForComingSoon } from '../nav-links-group/NavLinksGroupForComingSoon';
-import { SideNavData } from './data';
+import { SideNavData, footerLinks } from './data';
 import classes from './SideNavbar.module.css';
 
 interface SideNavbarProps {
@@ -37,6 +44,7 @@ interface SideNavbarProps {
 }
 
 export default function SideNavbar({ data }: SideNavbarProps) {
+  const profileData  = footerLinks;
   const [isNavOpen, setIsNavOpen] = useState(true);
   const { getFeatureFlag } = useFeatureFlagStore();
   const { colorScheme, setColorScheme } = useMantineColorScheme({
@@ -70,18 +78,29 @@ export default function SideNavbar({ data }: SideNavbarProps) {
     return <NavBarLinksGroup {...item} key={item.label} />;
   });
 
+  // Profile links
+  const profileLinks:JSX.Element[] = profileData.map(item => {
+    return <NavBarLinksGroup {...item} key={item.label} />;
+  });
+
+  const navToggleIcon = isNavOpen ? (
+    <IconArrowNarrowLeft
+      className="color-white absolute -right-3 top-1/3 bg-orange-500 border rounded-full z-10 cursor-pointer rotate-0 md:top-1/3 lg:top-1/2"
+      onClick={handleNavToggle}
+    />
+  ) : (
+    <IconArrowNarrowRight
+      className="color-white absolute -right-3 top-1/3  bg-orange-500 border rounded-full z-10 cursor-pointer md:top-1/3 lg:top-1/2"
+      onClick={handleNavToggle}
+    />
+  );
+  
   return (
     <nav
       className={`${classes.navbar} ${
         isNavOpen ? classes.open : classes.closed
       }`}
     >
-      {isNavOpen ? (
-        <IconX onClick={handleNavToggle} className={classes.menuButton} />
-      ) : (
-        <IconMenu2 onClick={handleNavToggle} className={classes.menuButton} />
-      )}
-
       <div className={classes.navbarMain}>
         <ScrollArea className={classes.links}>
           <Group className={classes.header}>
@@ -124,11 +143,7 @@ export default function SideNavbar({ data }: SideNavbarProps) {
 
           <div className={classes.linksInner}>{links}</div>
           <div className={classes.footer}>
-            <Link to="/profile" className={classes.link}>
-              <IconUser className={classes.linkIcon} stroke={1.5} />
-              <span>Profile</span>
-            </Link>
-
+          <div>{profileLinks}</div>
             <Link
               to="/login"
               className={classes.link}
@@ -143,6 +158,7 @@ export default function SideNavbar({ data }: SideNavbarProps) {
           </div>
         </ScrollArea>
       </div>
+      <div>{navToggleIcon}</div>
     </nav>
   );
 }

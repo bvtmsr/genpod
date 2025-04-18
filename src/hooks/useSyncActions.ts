@@ -16,6 +16,7 @@ export const useSyncActions = () => {
       const parsedProjects = JSON.parse(projects as unknown as string);
       setProjects(parsedProjects);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

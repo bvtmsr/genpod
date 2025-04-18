@@ -44,6 +44,7 @@ export default function Login() {
     if (personalDetails.username !== '') {
       navigate('/');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserLoggedIn()]);
   return (
     <Container

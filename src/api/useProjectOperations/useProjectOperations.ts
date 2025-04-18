@@ -49,6 +49,8 @@ export const useProjectOperations = () => {
     projectDetails: Project,
     options?: UseOperationsOptions<Project>
   ): UseOperationsReturnType<Project> => {
+    console.log('projectDetails-----------------', projectDetails, projectId,  options);
+    
     try {
       const { data } = await axiosMiddleware.put(
         `/projects/${projectId}`,
@@ -70,6 +72,19 @@ export const useProjectOperations = () => {
       await axiosMiddleware.delete(`/projects/${projectId}`);
       options?.onSuccess?.();
       return {};
+    } catch (error) {
+      options?.onFail?.(error);
+      return { error };
+    }
+  };
+
+  const getActiveProjects = async (
+    options?: UseOperationsOptions<Project[]>
+  ): UseOperationsReturnType<Project[]> => {
+    try {
+      const { data } = await axiosMiddleware.get(`/active-projects`);
+      options?.onSuccess?.(data);
+      return { data };
     } catch (error) {
       options?.onFail?.(error);
       return { error };
@@ -108,6 +123,7 @@ export const useProjectOperations = () => {
     getProject,
     updateProject,
     deleteProject,
+    getActiveProjects,
     getProjectSnapshots
   };
 };

@@ -2,7 +2,7 @@
   "id": "side-nav",
   "featureFlags": {
     "arch-diagrams": "hidden",
-    "compage": "visible",
+    "genpod": "visible",
     "networking": "hidden",
     "k8s-lac": "hidden",
     "ci-tekton": "hidden",
@@ -19,7 +19,7 @@
     "ml-ops": "hidden"
   },
   "variants": {
-    "compage": {
+    "genpod": {
       "type": "IMAGE",
       "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZquEwLz2vvTDz1OnSAUD8_ke1K0EmMNcl9FHtcKSMtA&s"
     },

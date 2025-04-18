@@ -1,0 +1,80 @@
+/* .node {
+	width: rem(200);
+	height: rem(360);
+	cursor: pointer;
+	background: var(--mantine-color-gray-5);
+	border-radius: var(--mantine-radius-md);
+	
+} */
+ .node{
+  outline: 3px solid var(--mantine-color-gray-2);
+ }
+
+.react-flow__node-group{
+  cursor: pointer;
+}
+
+
+.groupNode {
+  background: var(--mantine-color-dark-6);
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  border: 10px solid var(--mantine-color-dark-4);
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  min-height: 200px;
+  position: relative;
+  /* z-index: 0 !important; */
+ 
+}
+
+.expandIcon {
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mantine-color-gray-3);
+}
+
+
+
+/* Resizer styles  1a192b*/
+:global(.react-flow__resize-control) {
+  border: 2px solid #990a0a;
+}
+
+.node.node_selected {
+	outline: 3px solid var(--mantine-color-orange-6);
+}
+.node__header {
+	padding: var(--mantine-spacing-sm) var(--mantine-spacing-sm);
+	/* height: rem(36); */
+}
+
+.react-flow__node.groupNode{
+  cursor:pointer;
+}
+
+.iconHoverEffect, .iconBadge {
+  transition: all 0.2s ease;
+}
+
+.iconHoverEffect:hover {
+  transform: scale(1.6);
+  color: orange;
+}
+
+.iconBadge:hover {
+	transform: scale(1.6);
+	color: orange;
+  background-color: white; 
+  }
+
+  .nodeToolbar{
+    margin-top: 2%;
+    }
+  

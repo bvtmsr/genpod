@@ -1,6 +1,6 @@
 import { Box, Button, Group, TextInput } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { getInitialMicroserviceNodeFormData } from 'src/canvas/nodes/microservice/Microservice.utils';
+import { getInitialNodeFormData } from 'src/canvas/nodes/nodeservice/Node.utils';
 import { MicroServiceNode, NodeTypes } from 'src/canvas/store/types.store';
 import { useFlowsStore } from '../store/flowstore';
 
@@ -9,7 +9,7 @@ export function AddDBNodeModal() {
   const handleAddNodeClick = (name: string) => {
     const node: MicroServiceNode = {
       data: {
-        ...getInitialMicroserviceNodeFormData(),
+        ...getInitialNodeFormData(),
         name: name,
         type: NodeTypes.MICROSERVICE
       },

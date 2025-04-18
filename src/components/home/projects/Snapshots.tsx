@@ -14,8 +14,8 @@ export default function Snapshots() {
 
   useEffect(() => {
     (async function () {
-      if (!activeProject) return;
-      const res = await getProjectSnapshots(activeProject?.id);
+      if (activeProject.length === 0) return;
+      const res = await getProjectSnapshots(activeProject[0].id);
       if (res.data) {
         notifications.show({
           title: 'Snapshots fetched successfully',
@@ -31,7 +31,8 @@ export default function Snapshots() {
         });
       }
     })();
-  }, []);
+  }, [activeProject]);
+
   const rows = snapshots?.map(snapshot => (
     <Table.Tr
       key={snapshot.id}

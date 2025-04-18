@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { NumberInput, TextInput, Textarea } from 'react-hook-form-mantine';
 import { NodeTypes } from 'src/canvas/store/types.store';
 import { NodeDrawerFormProps } from 'src/canvas/types';
-import { schema } from '../../microservice/form/resolvers';
+import { schema } from '../../nodeservice/form/resolvers';
 import { ClientNodeFormData, ClientNodeFormDataUI } from '../ClientNode.types';
 import { useFlowsStore } from 'src/canvas/store/flowstore';
 
@@ -26,7 +26,8 @@ export default function ClientNodeDrawerForm(
       name: data.name,
       description: data.description,
       age: data.age,
-      type: NodeTypes.CLIENT_NODE
+      type: NodeTypes.CLIENT_NODE,
+      iconName:data.iconName
     };
     return t;
   };

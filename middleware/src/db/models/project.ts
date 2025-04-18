@@ -8,6 +8,7 @@ interface ProjectAttributes {
   name: string;
   flow: object;
   userId: string;
+  parentId: string;
 }
 
 interface ProjectCreationAttributes extends Optional<ProjectAttributes, 'id'> {}
@@ -20,6 +21,7 @@ class Project
   public name!: string;
   public flow!: object;
   public userId!: string;
+  public parentId!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -63,8 +65,14 @@ Project.init(
         model: 'users',
         key: 'id'
       },
+     
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
+    },
+    parentId: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      defaultValue: null
     }
   },
   {

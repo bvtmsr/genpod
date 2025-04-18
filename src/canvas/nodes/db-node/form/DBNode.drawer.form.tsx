@@ -5,7 +5,7 @@ import { NumberInput, TextInput, Textarea } from 'react-hook-form-mantine'
 import { useFlowsStore } from 'src/canvas/store/flowstore'
 import { NodeTypes } from 'src/canvas/store/types.store'
 import { NodeDrawerFormProps } from 'src/canvas/types'
-import { schema } from '../../microservice/form/resolvers'
+import { schema } from '../../nodeservice/form/resolvers'
 import { DBNodeFormData, DBNodeFormDataUI } from '../DBNode.types'
 
 export default function DBNodeDrawerForm({

@@ -23,12 +23,13 @@ export interface Project {
     nodes: CustomNode[];
     edges: CustomEdge[];
   };
+  parentId: string | null;
   requirements?: string; // basically a string version of json or yaml
 }
 
 export type ProjectStoreState = {
   projects: Project[];
-  activeProject: Project | null;
+  activeProject: Project[]; // Changed from Project | null to Project[]
 };
 export type ProjectStoreActions = {
   setProjects: (projects: Project[]) => void;

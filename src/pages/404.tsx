@@ -21,6 +21,7 @@ export default function PageNotFound() {
 		return () => {
 			notifications.hide(id)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	return (
 		<Container size='xl'>

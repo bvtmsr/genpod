@@ -2,7 +2,7 @@ import { Container, Grid } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import NodeStatusBox from 'src/canvas/nodes/microservice/status/NodeStatusBox';
+import NodeStatusBox from 'src/canvas/nodes/nodeservice/status/NodeStatusBox';
 import { useFlowsStore } from 'src/canvas/store/flowstore';
 import Protected from 'src/hoc/protected';
 
@@ -24,6 +24,7 @@ export default function Status() {
         navigate(`/project/${params.projectId}`);
       }, 3000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Protected>

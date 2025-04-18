@@ -1,7 +1,7 @@
 import { Box, Button, ButtonProps, Group, TextInput } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import React, { useState } from 'react';
-import { getInitialNodeFormData } from 'src/canvas/nodes/utils';
+import { getInitialNodesFormData } from 'src/canvas/nodes/utils';
 import { useFlowsStore } from 'src/canvas/store/flowstore';
 import { CustomNode, NodeTypes } from 'src/canvas/store/types.store';
 
@@ -58,7 +58,7 @@ export default function AddNodeModal({
           onSubmit={(nodeName: string) => {
             const node: CustomNode = {
               data: {
-                ...getInitialNodeFormData(type),
+                ...getInitialNodesFormData(type),
                 name: nodeName,
                 type
               },

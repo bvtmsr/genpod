@@ -66,7 +66,7 @@ const start = async () => {
     });
     fastify.log.info(`Server listening on http://localhost:${CONSTANTS.PORT}`);
   } catch (err) {
-    fastify.log.error(err);
+    //fastify.log.error(err);
     process.exit(1);
   }
 };

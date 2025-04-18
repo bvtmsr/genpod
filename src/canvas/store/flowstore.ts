@@ -251,7 +251,7 @@ export const useFlowsStore = create<FlowStore>()(
               [activeFlow]: {
                 ...flows[activeFlow],
                 nodes: flows[activeFlow].nodes.map(node => {
-                  if (node.id === nodeId) {
+                  if (nodeId.includes(node.id)) {
                     return {
                       ...node,
                       consumerData: {
@@ -267,6 +267,7 @@ export const useFlowsStore = create<FlowStore>()(
           });
         }
         const { activeNode } = flows[activeFlow];
+
         if (!activeNode) return;
         const updatedNode = {
           ...activeNode,
@@ -372,6 +373,7 @@ export const useFlowsStore = create<FlowStore>()(
             }
           }
         });
+        
         get().refreshActiveNode();
       },
       onEdgesChange: (changes: EdgeChange[]) => {
@@ -416,7 +418,92 @@ export const useFlowsStore = create<FlowStore>()(
             }
           }
         });
+      },
+      deleteNode: (nodeId: string) => {
+        const flows = get().flows;
+        if (!flows) return;
+        const activeFlow = get().activeFlow || '';
+        if (!activeFlow) return;
+        set({
+          flows: {
+            ...flows,
+            [activeFlow]: {
+              ...flows[activeFlow],
+              nodes: flows[activeFlow].nodes.filter(node => node.id !== nodeId),
+              edges: flows[activeFlow].edges.filter(edge => edge.source !== nodeId && edge.target !== nodeId)
+            }
+          }
+        });
+      },
+      deleteEdge: (nodeId: string) => {
+        const flows = get().flows;
+        if (!flows) return;
+        const activeFlow = get().activeFlow || '';
+        if (!activeFlow) return;
+        set({
+          flows: {
+            ...flows,
+            [activeFlow]: {
+              ...flows[activeFlow],
+              edges: flows[activeFlow].edges.filter(edge => edge.source !== nodeId && edge.target !== nodeId)
+            }
+          }
+        });
+      },
+      detachNodeFromGroup: (nodeId: string[]) => {
+        const flows = get().flows;
+        if (!flows) return;
+        const activeFlow = get().activeFlow || '';
+        if (!activeFlow) return;
+        set({
+          flows: {
+            ...flows,
+            [activeFlow]: {
+              ...flows[activeFlow],
+              nodes: flows[activeFlow].nodes.map(node => {
+                if (nodeId.includes(node.id)) {
+                  return {
+                    ...node,
+                    parentNode: undefined,
+                    expandParent: false
+                  };
+                }
+                return node;
+              })
+            }
+          }
+        });
+      },
+      setGroupNodeFormData: (groupNodeFormData: CustomNodeFormData, nodeId?: string) => {
+        const flows = get().flows;
+        if (!flows) return;
+        const activeFlow = get().activeFlow || '';
+        if (!activeFlow) return;
+        if (nodeId) {
+          set({
+            flows: {
+              ...flows,
+              [activeFlow]: {
+                ...flows[activeFlow],
+                nodes: flows[activeFlow].nodes.map(node => {
+                  if (nodeId.includes(node.id)) {
+                    return {
+                      ...node,
+                      data: {
+                        ...node.data,
+                        ...groupNodeFormData
+                      }
+                    };
+                  } else {
+                    return node;
+                  }
+                })
+              }
+            }
+          });
+        }   
       }
+      
     };
-  })
+  },{name: 'FlowStore', storeName: 'FlowStore'})
 );

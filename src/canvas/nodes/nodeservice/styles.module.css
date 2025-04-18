@@ -1,0 +1,41 @@
+.node {
+	width: rem(250);
+	height: rem(360);
+	cursor: pointer;
+	background: var(--mantine-color-gray-5);
+	border-radius: var(--mantine-radius-md);
+	outline: 3px solid var(--mantine-color-gray-2);
+	/* opacity: 0.8; */
+}
+
+.node.node_selected {
+	outline: 4px solid var(--mantine-color-orange-6);
+}
+.node__header {
+	padding: var(--mantine-spacing-sm) var(--mantine-spacing-sm);
+	/* height: rem(36); */
+}
+
+.group {
+	padding: rem(10);
+	margin: rem(10);
+	border: 1px solid var(--mantine-color-gray-4);
+	border-radius: var(--mantine-radius-md);
+}
+
+.codeEditor{
+  flex-grow:var(--tabs-panel-grow)
+}
+
+.iconHoverEffect {
+	transition: all 0.2s ease;
+  }
+  
+  .iconHoverEffect:hover {
+	transform: scale(1.6);
+	color: orange; /* Adjust this if needed */
+  }
+  
+  .nodeToolbar{
+	margin-top: 2%;
+  }

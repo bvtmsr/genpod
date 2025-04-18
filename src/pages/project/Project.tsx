@@ -15,6 +15,7 @@ import { useProjectStore } from 'src/store/useProjectStore';
 import { Anchor, Breadcrumbs, Flex, Grid, rem, Tabs } from '@mantine/core';
 import { IconHttpConnect, IconList, IconPhoto } from '@tabler/icons-react';
 
+
 interface ProjectParams {
   projectId: string;
 }
@@ -28,6 +29,9 @@ export default function Project() {
   const { addFlow, setNodes, setEdges } = useFlowsStore();
   const setActiveProject = useProjectStore(state => state.setActiveProject);
   const projects = useProjectStore(state => state.projects);
+  const getActiveProject = useProjectStore(state => state.activeProject);
+
+
 
   useEffect(() => {
     addFlow('flow' + params.projectId);
@@ -39,12 +43,14 @@ export default function Project() {
       setNodes(nodes);
       setEdges(edges);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const projectDetails = projects.find(
     project => project.id == params.projectId
   );
-
+  
+  
   const items = [
     { title: 'Home', href: '/' },
     {
@@ -112,7 +118,9 @@ export default function Project() {
                     height: 'calc(100vh - 120px)'
                   }}
                 >
+                  {/* canvas */}
                   <Flow />
+                  {/* Canvas */}
                 </Tabs.Panel>
                 <Tabs.Panel
                   value="snapshots"

@@ -3,6 +3,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import 'reactflow/dist/style.css';
 import './App.css';
+import './styles/tailwindcss.css';
 
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -54,7 +55,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/project/:projectId" element={<Project />} />
             <Route path="/project/:projectId/status" element={<Status />} />
-            <Route path="/profile" index element={<Profile />} />
+            <Route path="/projects" index element={<Profile />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </ModalsProvider>

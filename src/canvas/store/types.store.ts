@@ -1,28 +1,32 @@
 import { Edge, Node, OnConnect, OnEdgesChange, OnNodesChange } from 'reactflow';
 import { ClientNodeFormData } from '../nodes/client-node/ClientNode.types';
 import { DBNodeFormData } from '../nodes/db-node/DBNode.types';
-import { MicroServiceNodeData } from '../nodes/microservice/MicroserviceNode.types';
+import { NodeData } from '../nodes/nodeservice/Nodetypes.types';
+import { GroupNodeData } from '../nodes/group-node/GroupNode.types';
 
 export enum NodeTypes {
   MICROSERVICE = 'microservice',
   NESTED_MICROSERVICE_NODE = 'nested-microservice-node',
   DB_NODE = 'db-node',
-  CLIENT_NODE = 'client-node'
+  CLIENT_NODE = 'client-node',
+  GROUP = 'group'
 }
 
 export enum EdgeTypes {
   CUSTOM_EDGE = 'custom-edge'
 }
 
-export type MicroServiceNode = Node<MicroServiceNodeData, NodeTypes>;
+export type MicroServiceNode = Node<NodeData, NodeTypes>;
 export type DBNode = Node<DBNodeFormData, NodeTypes>;
 export type ClientNode = Node<ClientNodeFormData, NodeTypes>;
+export type GroupNode = Node<GroupNodeData, NodeTypes>;
 
-export type CustomNode = MicroServiceNode | DBNode | ClientNode;
+export type CustomNode = MicroServiceNode | DBNode | ClientNode | GroupNode;
 export type CustomNodeFormData =
-  | MicroServiceNodeData
+  | NodeData
   | DBNodeFormData
-  | ClientNodeFormData;
+  | ClientNodeFormData
+  | GroupNodeData;
 
 export type CustomEdge = Edge;
 export type CustomEdgeFormData = {
@@ -75,5 +79,10 @@ export interface FlowStore {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
+  deleteNode: (nodeId: string) => void;
+  deleteEdge: (edgeId: string) => void;
+  detachNodeFromGroup: (nodeId: string[]) => void;
+  setGroupNodeFormData: (nodeFormData: CustomNodeFormData, nodeId?: string) => void;  
+ // deleteGroup: (groupId: string) => void;
 }
-export type NodeConsumerData = MicroServiceNodeData;
+export type NodeConsumerData = NodeData;

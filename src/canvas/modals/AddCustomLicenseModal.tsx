@@ -25,7 +25,7 @@ const AddCustomLicenseForm = () => {
   });
 
   const onSubmit = (data: LicenseFormInput) => {
-    console.log(data);
+    
     if (!activeFlow) return;
     updateLicenses(activeFlow, data.licenses);
   };

@@ -46,7 +46,8 @@ export default function AddOrLoadProject() {
       flow: {
         nodes: [],
         edges: []
-      }
+      },
+      parentId: ''
     };
     const { error } = await postProject(project);
     if (error) {

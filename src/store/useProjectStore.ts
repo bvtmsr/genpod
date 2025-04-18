@@ -3,6 +3,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { ProjectStoreActions, ProjectStoreState } from './types';
 import axiosMiddleware from 'src/api/axiosMiddleware';
+import { Project } from 'reactflow';
 
 export const useProjectStore = create<
   ProjectStoreState & ProjectStoreActions
@@ -11,12 +12,38 @@ export const useProjectStore = create<
     persist(
       immer((set, get) => {
         return {
-          activeProject: null,
+          activeProject: [],
           projects: [],
           setActiveProject: projectId => {
-            if (!projectId) return set({ activeProject: null });
-            const activeProject = get().projects.find(p => p.id == projectId);
-            return set({ activeProject });
+         
+            
+            if (!projectId) return set(state => {
+              return { activeProject: [] };
+            });
+            const activePro = get().projects.find(p => p.id == projectId);
+              
+            return set(state => {
+              //state.activeProject.map(p => console.log('000000', p.id));
+              const newActiveProject =(state.activeProject) ? state.activeProject.find(p => p.id == projectId)
+                ? state.activeProject
+                : [...state.activeProject, activePro] : [activePro];
+                
+               
+                
+              return { activeProject: newActiveProject };
+            });
+          },
+          addProject: (newProject:Project) => {
+            set(state => {
+              const newActiveProject = [...state.activeProject, newProject];
+              return { activeProject: newActiveProject };
+            });
+          },
+          getStoreProjects: () => {
+            return get().projects;
+          },
+          getProjects: () => {
+            return get().activeProject;
           },
           setProjects: projects => {
             set({ projects });

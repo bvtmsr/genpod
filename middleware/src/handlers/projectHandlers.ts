@@ -7,16 +7,18 @@ export const createProject = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const { name, flow } = request.body as {
+  const { name, flow, parentId } = request.body as {
     name: string;
     flow: object;
+    parentId: string;
   };
 
   if (!name) {
     return reply.status(400).send({ error: 'Project name is required' });
   }
   const userId = request.user?.id!;
-  const project = await Project.create({ name, flow, userId });
+
+  const project = await Project.create({ name, flow, userId, parentId });
 
   reply.status(201).send({ message: 'Project created successfully', project });
 };
@@ -26,9 +28,10 @@ export const updateProject = async (
   reply: FastifyReply
 ) => {
   const { id } = request.params as { id: string };
-  const { name, flow } = request.body as {
+  const { name, flow, parentId } = request.body as {
     name: string;
     flow: object;
+    parentId: string;
   };
 
   const project = await Project.findByPk(id);
@@ -39,6 +42,7 @@ export const updateProject = async (
 
   project.name = name;
   project.flow = flow;
+  project.parentId = parentId;
 
   await project.save();
 

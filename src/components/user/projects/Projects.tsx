@@ -34,6 +34,7 @@ const convertProjectDataToTabularData = (projects: Project[]) => {
 
 export default function Projects() {
   const { getProjects, deleteProject } = useProjectOperations();
+  
   const { setProjects, projects } = useProjectStore();
 
   const { syncProjects } = useSyncActions();
