@@ -106,7 +106,7 @@ export default function SideNavbar({ data }: SideNavbarProps) {
           <Group className={classes.header}>
             <Group justify="space-between">
               <GenPodLogo />
-              <Tooltip label="Toggle Theme">
+              {/* <Tooltip label="Toggle Theme">
                 {colorScheme === 'dark' ? (
                   <ActionIcon
                     variant="gradient"
@@ -124,7 +124,7 @@ export default function SideNavbar({ data }: SideNavbarProps) {
                     <IconMoon />
                   </ActionIcon>
                 )}
-              </Tooltip>
+              </Tooltip> */}
               <Code fw={700}>v1.0.0</Code>
             </Group>
             <Group>
